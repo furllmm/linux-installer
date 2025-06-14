@@ -107,7 +107,7 @@ Pull requests and suggestions are welcome!
 - Inspired by [WubiUEFI](https://github.com/hakuna-m/wubiuefi)
 - Developed by [furllamm](https://github.com/furllamm)
 
---
+---
 
-also donate me if u want: :D
+donate me  :D
 EVM (only low fee coins accepted) : 0xa3c4468d82881afb64e3fb5100aa0d3e6ea1f4dd
