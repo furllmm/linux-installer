@@ -109,5 +109,12 @@ Pull requests and suggestions are welcome!
 
 ---
 
-donate me  :D
-EVM (only low fee coins accepted) : 0xa3c4468d82881afb64e3fb5100aa0d3e6ea1f4dd
+Support & Donations 🙏
+If you find this tool helpful and want to support its development, feel free to donate! Every contribution helps me dedicate more time and improve the project.
+
+Ethereum (EVM, low-fee coins preferred):
+0xa3c4468d82881afb64e3fb5100aa0d3e6ea1f4dd
+
+Thank you for being part of this journey! 🚀
+
+
