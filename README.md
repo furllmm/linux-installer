@@ -117,4 +117,5 @@ Ethereum (EVM, low-fee coins preferred):
 
 Thank you for being part of this journey! 🚀
 
+If you liked this project, please share it to reach more people! ⭐️🙏
 
