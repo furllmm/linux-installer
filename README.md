@@ -1,190 +1,48 @@
-# 🐧 Modern Linux Installer v2.0.0
+# 🐧 Modern Linux Installer (Windows/ext2fsd Edition)
 
-A professional, modern Linux installation tool with an intuitive GUI for creating Linux installations on VHD files and direct partition installations with dual-boot support.
+A professional Linux installation tool for Windows systems, designed to work with ext2/3/4 partitions mounted via [ext2fsd](http://www.ext2fsd.com/) or similar drivers. This version does **not** require WSL or any Linux environment.
 
-## ✨ Features
+## Features
+- Modern, intuitive user interface (Tkinter)
+- VHD-based Linux installations (VHD creation only; format/copy in Linux)
+- Direct installation to existing ext2/3/4 partitions (mounted via ext2fsd)
+- Multi-distribution ISO detection (Ubuntu, Debian, antiX, MX, Puppy, etc.)
+- Real-time progress tracking
+- Windows-native rootfs copy to ext2/3/4 partitions
+- No WSL or Linux required for partition operations
 
-### 🎨 Modern User Interface
-- **Dark Theme**: Professional dark UI with modern styling
-- **Tabbed Interface**: Organized workflow with dedicated tabs for different operations
-- **Real-time Progress**: Live status updates with progress indicators and emoji feedback
-- **Responsive Design**: Scalable interface that adapts to different screen sizes
+## Requirements
+- **Windows 10/11**
+- **Python 3.8+** (with Tkinter)
+- **ext2fsd** (or similar) for mounting ext2/3/4 partitions as Windows drive letters
+- **7-Zip** (for ISO extraction; path can be set in the script)
+- **QEMU** (for VHD creation; path can be set in the script)
 
-### 🔧 Installation Methods
-- **VHD Installation**: Create and manage Virtual Hard Disk files for Linux installations
-- **Direct Partition Installation**: Install directly to existing ext4 partitions
-- **Dual-Boot Integration**: Automatic Windows boot menu configuration with BCDEDIT
+## Installation
+1. Install [Python 3.8+](https://www.python.org/downloads/) (ensure Tkinter is included).
+2. Install [ext2fsd](http://www.ext2fsd.com/) and mount your ext2/3/4 partitions as Windows drive letters (e.g., E:, F:).
+3. Install [7-Zip](https://www.7-zip.org/) and [QEMU](https://www.qemu.org/download/), or update their paths in the script if needed.
+4. Clone this repository and run:
+   ```
+   pip install -r requirements.txt
+   python linux-installer.py
+   ```
 
-### 🐧 Distribution Support
-Auto-detection for major Linux distributions:
-- Ubuntu/Debian (Casper-based)
-- Arch Linux & Manjaro
-- Fedora/Red Hat
-- Slax/Slackware
-- TinyCore/Puppy Linux
-- Generic GRUB-based distributions
-
-### 🛠️ Advanced Features
-- **Cross-Platform**: Native support for Windows and Linux
-- **WSL Integration**: Seamless Windows Subsystem for Linux support
-- **GRUB Management**: Automatic bootloader installation and configuration
-- **System Diagnostics**: Built-in dependency checking and system information
-- **Error Logging**: Comprehensive error tracking and log viewing
-- **Administrator Detection**: Automatic privilege checking with warnings
-
-## 📋 System Requirements
-
-### Windows
-- **OS**: Windows 10/11 (64-bit recommended)
-- **Python**: 3.6 or higher
-- **WSL**: Windows Subsystem for Linux enabled
-- **Dependencies**: 7-Zip, QEMU
-- **Privileges**: Administrator rights for full functionality
-
-### Linux
-- **OS**: Ubuntu 18.04+, Debian 10+, or equivalent
-- **Python**: 3.6 or higher with tkinter support
-- **Dependencies**: qemu-utils, p7zip-full, grub-common
-- **Privileges**: sudo access for disk operations
-
-## 🚀 Quick Installation
-
-### Windows Setup
-
-# Clone the repository
-git clone https://github.com/yourusername/modern-linux-installer
-cd modern-linux-installer
-
-# Run automated setup
-requirements.bat
+## Usage
+- **ISO Extraction:** Select your Linux ISO and extract the root filesystem.
+- **Select Existing RootFS:** Choose a previously extracted rootfs folder.
+- **Partition Installation:**
+  - Select an ext2/3/4 partition (must be mounted via ext2fsd and visible as a drive letter).
+  - Copy the rootfs to the partition (Windows-native copy).
+- **VHD Operations:**
+  - Create VHD files (formatting and rootfs copy must be done in a Linux environment).
+- **GRUB Installation:**
+  - Not supported in Windows. Please install GRUB from a Linux environment after copying rootfs.
 
 
-### Linux Setup
+## License
+MIT
 
-# Clone the repository
-git clone https://github.com/yourusername/modern-linux-installer
-cd modern-linux-installer
-
-# Run automated setup
-sudo chmod +x requirements.sh
-sudo ./requirements.sh
-
-
-## 📖 Usage Guide
-
-### 1. 📁 Setup & ISO Selection
-- Browse and select your Linux distribution ISO file
-- Automatic distribution detection and validation
-- Extract root filesystem from ISO
-
-### 2. 💾 VHD Installation
-- Create new VHD files (2-100GB configurable)
-- Format VHD as ext4 filesystem
-- Copy extracted root filesystem to VHD
-- Install GRUB bootloader
-- Add VHD to Windows boot menu
-
-### 3. 🗂️ Partition Installation
-- Scan and select existing ext4 partitions
-- Direct installation to physical partitions
-- GRUB installation to partition boot sector
-
-### 4. ⚙️ Advanced Tools
-- System information and diagnostics
-- Dependency verification
-- Application logs and error tracking
-- About and help information
-
-## 🔧 Configuration
-
-### Default Paths (Windows)
-
-7-Zip: J:\portableapps\PortableApps\7-ZipPortable\App\7-Zip\7z.exe
-QEMU: D:\win\qemu\qemu-img.exe
-
-
-### Customization
-Edit the paths in `linux-installer.py` if your installations differ:
-
-self._7z_path = r"YOUR_7ZIP_PATH\7z.exe"
-self.qemu_path = r"YOUR_QEMU_PATH\qemu-img.exe"
-
-
-## 🚨 Important Notes
-
-### Administrator Privileges
-- **Windows**: Run as Administrator for boot menu modifications
-- **Linux**: Use sudo for disk operations and mounting
-- **Limited Mode**: Basic functionality available without admin rights
-
-### WSL Requirements (Windows)
-- WSL must be enabled and configured
-- Ubuntu or Debian distribution recommended
-- Required for ext4 formatting and Linux filesystem operations
-
-### Backup Warning
-⚠️ **Always backup important data before disk operations!**
-- VHD creation is generally safe
-- Partition operations modify existing disks
-- Boot menu changes affect system startup
-
-## 🐛 Troubleshooting
-
-### Common Issues
-1. **Dependencies Not Found**: Run requirements script again
-2. **WSL Not Available**: Enable WSL in Windows Features
-3. **Permission Denied**: Run with administrator/sudo privileges
-4. **ISO Not Detected**: Ensure ISO is a valid Linux distribution
-
-### Log Files
-- Error logs are automatically saved to `error.log`
-- Use "View Logs" in the Advanced tab for troubleshooting
-- Include log contents when reporting issues
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these guidelines:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-### Development Setup
-
-# Clone your fork
-git clone https://github.com/yourusername/modern-linux-installer
-cd modern-linux-installer
-
-# Install development dependencies
-pip install -r requirements-dev.txt  # If available
-
-# Run the application
-python linux-installer.py
-
-
-## 📄 License
-
-This project is licensed under the MIT License 
-
-## 🙏 Acknowledgments
-
-- **7-Zip** for reliable archive extraction
-- **QEMU** for VHD creation and management
-- **Python tkinter** for the GUI framework
-- **Linux community** for inspiration and testing
-
-## 📞 Support
-
-- **Email**:  furfur638@gmail.com
-
----
-
-**Developed with ❤️ for the Linux community**
-
-*Making Linux installation accessible and modern for everyone*
----
 
 Support & Donations 🙏
 If you find this tool helpful and want to support its development, feel free to donate! Every contribution helps me dedicate more time and improve the project.
