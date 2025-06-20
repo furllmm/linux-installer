@@ -1,112 +1,193 @@
-# linux-installer
+# 🐧 Modern Linux Installer v2.0.0
 
-# Custom Linux Installer for Windows (WubiUEFI Alternative)
+![Modern Linux Installer](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-A graphical Python tool to install Linux distributions on Windows using a VHD file, inspired by WubiUEFI.  
-**No need to repartition your disk!**  
-Supports Ubuntu, Debian, Arch, Fedora, Slax, Manjaro, TinyCore, and more.
+A professional, modern Linux installation tool with an intuitive GUI for creating Linux installations on VHD files and direct partition installations with dual-boot support.
+
+## ✨ Features
+
+### 🎨 Modern User Interface
+- **Dark Theme**: Professional dark UI with modern styling
+- **Tabbed Interface**: Organized workflow with dedicated tabs for different operations
+- **Real-time Progress**: Live status updates with progress indicators and emoji feedback
+- **Responsive Design**: Scalable interface that adapts to different screen sizes
+
+### 🔧 Installation Methods
+- **VHD Installation**: Create and manage Virtual Hard Disk files for Linux installations
+- **Direct Partition Installation**: Install directly to existing ext4 partitions
+- **Dual-Boot Integration**: Automatic Windows boot menu configuration with BCDEDIT
+
+### 🐧 Distribution Support
+Auto-detection for major Linux distributions:
+- Ubuntu/Debian (Casper-based)
+- Arch Linux & Manjaro
+- Fedora/Red Hat
+- Slax/Slackware
+- TinyCore/Puppy Linux
+- Generic GRUB-based distributions
+
+### 🛠️ Advanced Features
+- **Cross-Platform**: Native support for Windows and Linux
+- **WSL Integration**: Seamless Windows Subsystem for Linux support
+- **GRUB Management**: Automatic bootloader installation and configuration
+- **System Diagnostics**: Built-in dependency checking and system information
+- **Error Logging**: Comprehensive error tracking and log viewing
+- **Administrator Detection**: Automatic privilege checking with warnings
+
+## 📋 System Requirements
+
+### Windows
+- **OS**: Windows 10/11 (64-bit recommended)
+- **Python**: 3.6 or higher
+- **WSL**: Windows Subsystem for Linux enabled
+- **Dependencies**: 7-Zip, QEMU
+- **Privileges**: Administrator rights for full functionality
+
+### Linux
+- **OS**: Ubuntu 18.04+, Debian 10+, or equivalent
+- **Python**: 3.6 or higher with tkinter support
+- **Dependencies**: qemu-utils, p7zip-full, grub-common
+- **Privileges**: sudo access for disk operations
+
+## 🚀 Quick Installation
+
+### Windows Setup
+
+# Clone the repository
+git clone https://github.com/yourusername/modern-linux-installer
+cd modern-linux-installer
+
+# Run automated setup
+requirements.bat
+
+
+### Linux Setup
+
+# Clone the repository
+git clone https://github.com/yourusername/modern-linux-installer
+cd modern-linux-installer
+
+# Run automated setup
+sudo chmod +x requirements.sh
+sudo ./requirements.sh
+
+
+## 📖 Usage Guide
+
+### 1. 📁 Setup & ISO Selection
+- Browse and select your Linux distribution ISO file
+- Automatic distribution detection and validation
+- Extract root filesystem from ISO
+
+### 2. 💾 VHD Installation
+- Create new VHD files (2-100GB configurable)
+- Format VHD as ext4 filesystem
+- Copy extracted root filesystem to VHD
+- Install GRUB bootloader
+- Add VHD to Windows boot menu
+
+### 3. 🗂️ Partition Installation
+- Scan and select existing ext4 partitions
+- Direct installation to physical partitions
+- GRUB installation to partition boot sector
+
+### 4. ⚙️ Advanced Tools
+- System information and diagnostics
+- Dependency verification
+- Application logs and error tracking
+- About and help information
+
+## 🔧 Configuration
+
+### Default Paths (Windows)
+
+7-Zip: J:\portableapps\PortableApps\7-ZipPortable\App\7-Zip\7z.exe
+QEMU: D:\win\qemu\qemu-img.exe
+
+
+### Customization
+Edit the paths in `linux-installer.py` if your installations differ:
+
+self._7z_path = r"YOUR_7ZIP_PATH\7z.exe"
+self.qemu_path = r"YOUR_QEMU_PATH\qemu-img.exe"
+
+
+## 🚨 Important Notes
+
+### Administrator Privileges
+- **Windows**: Run as Administrator for boot menu modifications
+- **Linux**: Use sudo for disk operations and mounting
+- **Limited Mode**: Basic functionality available without admin rights
+
+### WSL Requirements (Windows)
+- WSL must be enabled and configured
+- Ubuntu or Debian distribution recommended
+- Required for ext4 formatting and Linux filesystem operations
+
+### Backup Warning
+⚠️ **Always backup important data before disk operations!**
+- VHD creation is generally safe
+- Partition operations modify existing disks
+- Boot menu changes affect system startup
+
+## 🐛 Troubleshooting
+
+### Common Issues
+1. **Dependencies Not Found**: Run requirements script again
+2. **WSL Not Available**: Enable WSL in Windows Features
+3. **Permission Denied**: Run with administrator/sudo privileges
+4. **ISO Not Detected**: Ensure ISO is a valid Linux distribution
+
+### Log Files
+- Error logs are automatically saved to `error.log`
+- Use "View Logs" in the Advanced tab for troubleshooting
+- Include log contents when reporting issues
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these guidelines:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
+
+# Clone your fork
+git clone https://github.com/yourusername/modern-linux-installer
+cd modern-linux-installer
+
+# Install development dependencies
+pip install -r requirements-dev.txt  # If available
+
+# Run the application
+python linux-installer.py
+
+
+## 📄 License
+
+This project is licensed under the MIT License 
+
+## 🙏 Acknowledgments
+
+- **7-Zip** for reliable archive extraction
+- **QEMU** for VHD creation and management
+- **Python tkinter** for the GUI framework
+- **Linux community** for inspiration and testing
+
+## 📞 Support
+
+- **Email**:  furfur638@gmail.com
 
 ---
 
-## Features
+**Developed with ❤️ for the Linux community**
 
-- **Easy GUI:** Select your Linux ISO and follow the steps.
-- **Automatic ISO Detection:** Detects the base of your ISO (Ubuntu, Arch, etc.).
-- **VHD Creation:** Create a virtual disk (VHD) of any size.
-- **Filesystem Setup:** Format the VHD as ext4 using WSL.
-- **RootFS Extraction:** Extract and copy the Linux root filesystem to the VHD.
-- **GRUB Bootloader:** Installs GRUB and generates a basic `grub.cfg`.
-- **Windows Boot Menu:** Adds your Linux VHD to the Windows boot menu (via `bcdedit`).
-- **No Partitioning:** Safe for your existing Windows installation.
-
----
-
-## Requirements
-
-- **Windows 10/11** (Administrator rights required)
-- **Python 3.8+**
-- **WSL (Windows Subsystem for Linux) installed**
-- **7-Zip** (added to your PATH)
-- **Linux ISO** (Ubuntu, Debian, Arch, etc.)
-
----
-
-## Installation
-
-1. **Clone this repository:**
-    ```sh
-    git clone https://github.com/furllamm/linux-vhd-installer.git
-    cd linux-vhd-installer
-    ```
-
-2. **Install Python dependencies:**
-    - Run `requirements.bat` to install all required Python modules and check for system dependencies.
-    - *(Most dependencies are standard libraries.)*
-
-3. **Run the installer as Administrator:**
-    - Right-click and select "Run as administrator" or launch from an elevated command prompt.
-
----
-
-## Usage
-
-1. **Select your Linux ISO.**
-2. **Extract the root filesystem** (squashfs/rootfs).
-3. **Create and mount a VHD** (choose size with the slider).
-4. **Format the VHD as ext4** (via WSL).
-5. **Copy the rootfs to the VHD.**
-6. **Install GRUB bootloader** (via WSL).
-7. **Add the VHD to Windows boot menu.**
-8. **Reboot and select your new Linux from the Windows boot menu!**
-
----
-
-## Supported Distributions
-
-- Ubuntu / Debian (casper)
-- Arch / Manjaro
-- Fedora
-- Slax / Slackware
-- TinyCore / Puppy Linux
-- Any ISO with standard squashfs/rootfs layout
-
----
-
-## Notes & Tips
-
-- **Run as Administrator!** Disk and boot menu operations require admin rights.
-- **WSL must be installed and enabled.**
-- **7-Zip must be in your PATH.**
-- **For EFI systems:** You may need to use [Grub2Win](https://sourceforge.net/projects/grub2win/) or install GRUB to the EFI partition manually.
-- **If `bootsect.lnx` is missing:** Windows cannot boot directly; use Grub2Win or similar tools.
-- **Feedback & Fixes:** This tool is experimental. You are welcome to suggest code improvements or fixes via issues or pull requests.
-
----
-
-## Disclaimer
-
-This tool is experimental. Use at your own risk.  
-Always back up important data before modifying boot settings or disks.
-
----
-
-## License
-
-MIT License
-
----
-
-## Contributing
-
-Pull requests and suggestions are welcome!
-
----
-
-## Credits
-
-- Inspired by [WubiUEFI](https://github.com/hakuna-m/wubiuefi)
-- Developed by [furllamm](https://github.com/furllamm)
-
+*Making Linux installation accessible and modern for everyone*
 ---
 
 Support & Donations 🙏
